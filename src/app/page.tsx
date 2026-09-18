@@ -2,15 +2,15 @@ import PageTemplate from "@/components/PageTemplate";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "PhotoKB - Fast Image Compressor",
-  description: "Compress images without the headache. Shrink photos to 20 KB, 50 KB, 100 KB, or any size you need right in your browser.",
+  title: "ToolKB — Free Online Tools for Files, Images & More",
+  description: "Free online tools for compressing, resizing, converting and working with images, PDFs and files directly in your browser.",
 };
 
 export default function Home() {
   return (
     <PageTemplate 
-      h1="Compress images without the headache."
-      h2="Shrink a photo to 20 KB, 50 KB, 100 KB or any size you need — right in your browser."
+      h1="ToolKB"
+      h2="Free online tools for files, images & more. Compress, resize and convert files with simple browser-based tools."
       defaultTargetKb={50}
     />
   );

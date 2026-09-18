@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://photokb.com/sitemap.xml
+Sitemap: https://toolkb.com/sitemap.xml

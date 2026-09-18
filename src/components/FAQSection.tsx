@@ -10,23 +10,23 @@ interface FAQItem {
 const faqs: FAQItem[] = [
   {
     question: "How do I compress an image to 50 KB?",
-    answer: "Simply drop or select your photo, tap the 50 KB target button, and tap Compress. PhotoKB automatically optimizes the quantization tables so the final file lands safely under 50 KB without manual quality trials."
+    answer: "Simply drop or select your photo, tap the 50 KB target button, and tap Compress. ToolKB's Image Compressor automatically optimizes the quantization tables so the final file lands safely under 50 KB without manual quality trials."
   },
   {
-    question: "Does PhotoKB upload my photo to any server?",
+    question: "Does ToolKB upload my photo to any server?",
     answer: "No. All image encoding runs directly in your browser using client-side JavaScript. Your photos never leave your device, making it safe for ID cards and signatures."
   },
   {
     question: "Will compressing my photo reduce visible quality?",
-    answer: "PhotoKB utilizes progressive MozJPEG compression that discards redundant metadata and chrominance noise while preserving facial contours and text clarity. Unless compressed below 15 KB, faces stay crisp."
+    answer: "ToolKB's Image Compressor utilizes progressive MozJPEG compression that discards redundant metadata and chrominance noise while preserving facial contours and text clarity. Unless compressed below 15 KB, faces stay crisp."
   },
   {
     question: "Can I compress a photo down to 20 KB?",
     answer: "Yes. Select the 20 KB preset. The compression pipeline automatically resizes oversized dimensions slightly if needed to ensure the file complies with strict 20 KB limits."
   },
   {
-    question: "Can I use PhotoKB directly on mobile?",
-    answer: "Yes! PhotoKB is specifically optimized for mobile Safari and Chrome. You can take a photo with your camera or select from your gallery, shrink it immediately, and upload to forms."
+    question: "Can I use ToolKB directly on mobile?",
+    answer: "Yes! ToolKB is specifically optimized for mobile Safari and Chrome. You can take a photo with your camera or select from your gallery, shrink it immediately, and upload to forms."
   }
 ];
 

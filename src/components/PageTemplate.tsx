@@ -15,9 +15,9 @@ export default function PageTemplate({ h1, h2, defaultTargetKb }: PageTemplatePr
       <header className="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)] pt-safe">
         <div className="h-14 px-margin flex items-center justify-between max-w-4xl mx-auto">
           <div className="flex items-center gap-space-sm">
-            <Image src="/logo.svg" alt="PhotoKB Brand Logo" width={160} height={44} className="h-8 w-auto object-contain" />
+            <Image src="/logo.svg" alt="ToolKB Brand Logo" width={160} height={44} className="h-8 w-auto object-contain" />
             <Link href="/" className="flex items-baseline tracking-tight">
-              <span className="font-headline-sm text-headline-sm text-primary">Photo</span>
+              <span className="font-headline-sm text-headline-sm text-primary">Tool</span>
               <span className="font-headline-sm text-headline-sm text-secondary ml-0.5">KB</span>
             </Link>
             <span className="hidden xs:inline-block font-mono-spec text-mono-spec uppercase text-on-surface-variant bg-surface-container-high px-space-xs py-0.5 rounded">v2.4</span>
@@ -58,7 +58,7 @@ export default function PageTemplate({ h1, h2, defaultTargetKb }: PageTemplatePr
                 When a form says &ldquo;maximum {defaultTargetKb} KB.&rdquo;
               </h2>
               <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                You shouldn&apos;t have to open Photoshop, guess quality sliders, export three times, and check file properties. PhotoKB handles the fiddly part instantly.
+                You shouldn&apos;t have to open Photoshop, guess quality sliders, export three times, and check file properties. ToolKB handles the fiddly part instantly.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
@@ -119,7 +119,7 @@ export default function PageTemplate({ h1, h2, defaultTargetKb }: PageTemplatePr
                 Your photo doesn&apos;t need a trip to our server.
               </h2>
               <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed mt-1">
-                Traditional online tools upload your sensitive personal photos to remote cloud servers. PhotoKB executes codecs natively in your device&apos;s local memory sandbox.
+                Traditional online tools upload your sensitive personal photos to remote cloud servers. ToolKB executes codecs natively in your device&apos;s local memory sandbox.
               </p>
             </div>
             
@@ -191,8 +191,8 @@ export default function PageTemplate({ h1, h2, defaultTargetKb }: PageTemplatePr
 
         <footer className="mt-space-xl pt-space-lg pb-space-lg flex flex-col items-center text-center gap-space-md">
           <div className="flex items-center gap-space-xs">
-            <Image src="/logo.svg" alt="PhotoKB Brand Logo" width={90} height={25} className="h-6 w-auto object-contain opacity-70" />
-            <span className="font-headline-sm text-headline-sm text-primary opacity-80">Photo</span>
+            <Image src="/logo.svg" alt="ToolKB Brand Logo" width={90} height={25} className="h-6 w-auto object-contain opacity-70" />
+            <span className="font-headline-sm text-headline-sm text-primary opacity-80">Tool</span>
             <span className="font-headline-sm text-headline-sm text-secondary opacity-80">KB</span>
           </div>
           <p className="font-body-sm text-body-sm text-on-surface-variant italic">Make your files fit.</p>
@@ -202,7 +202,7 @@ export default function PageTemplate({ h1, h2, defaultTargetKb }: PageTemplatePr
             <Link href="/signature-compressor" className="hover:text-primary transition-colors">Signature Compressor</Link>
             <Link href="/about" className="hover:text-primary transition-colors">About</Link>
           </div>
-          <p className="font-mono-spec text-mono-spec text-on-surface-variant/80 mt-space-xs">© 2026 PhotoKB • 🔒 Local browser processing</p>
+          <p className="font-mono-spec text-mono-spec text-on-surface-variant/80 mt-space-xs">© 2026 ToolKB • 🔒 Local browser processing</p>
         </footer>
       </main>
 

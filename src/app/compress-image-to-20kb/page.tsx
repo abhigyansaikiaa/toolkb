@@ -2,7 +2,7 @@ import PageTemplate from "@/components/PageTemplate";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Compress Image to 20 KB - PhotoKB",
+  title: "ToolKB — Compress Image to 20KB Online",
   description: "Easily compress your image down to 20 KB for exams, portals, and strict application forms. 100% secure in your browser.",
 };
 

@@ -2,7 +2,7 @@ import PageTemplate from "@/components/PageTemplate";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Resize Image - PhotoKB",
+  title: "ToolKB — Resize Image Online",
   description: "Resize image dimensions and shrink file size in seconds. Keep your photos local and secure.",
 };
 

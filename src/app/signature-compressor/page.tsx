@@ -2,7 +2,7 @@ import PageTemplate from "@/components/PageTemplate";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Signature Compressor - PhotoKB",
+  title: "ToolKB — Signature Compressor",
   description: "Compress digital signatures for forms, portals, and official documents without uploading them to a server.",
 };
 

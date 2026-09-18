@@ -2,7 +2,7 @@ import PageTemplate from "@/components/PageTemplate";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Compress Signature to 20 KB - PhotoKB",
+  title: "ToolKB — Compress Signature to 20KB",
   description: "Shrink your scanned signature down to 20 KB. Essential for job applications, passports, and exams.",
 };
 

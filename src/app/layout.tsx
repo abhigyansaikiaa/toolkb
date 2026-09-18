@@ -17,8 +17,8 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "PhotoKB - Fast Image Compressor",
-  description: "Compress images without the headache. Shrink photos to 20 KB, 50 KB, 100 KB, or any size you need right in your browser.",
+  title: "ToolKB — Free Online Tools for Files, Images & More",
+  description: "Free online tools for compressing, resizing, converting and working with images, PDFs and files directly in your browser.",
 };
 
 export default function RootLayout({

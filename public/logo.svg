@@ -13,8 +13,7 @@
     <rect x="18" y="24" width="16" height="10" rx="3" fill="#171717"/>
     <text x="26" y="31.5" fill="#FAF8F3" font-family="'Manrope', sans-serif" font-size="6.5" font-weight="800" text-anchor="middle" letter-spacing="0.2">KB</text>
   </g>
-  <!-- Wordmark: Photo (Ink Black #171717) + KB (Persimmon Orange #F26B38) -->
   <text x="50" y="27" font-family="'Manrope', sans-serif" font-size="22" font-weight="800" letter-spacing="-0.5">
-    <tspan fill="#171717">Photo</tspan><tspan fill="#F26B38">KB</tspan>
+    <tspan fill="#171717">Tool</tspan><tspan fill="#F26B38">KB</tspan>
   </text>
 </svg>

@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About PhotoKB",
-  description: "Learn how PhotoKB securely compresses your images locally in your browser without any server uploads.",
+  title: "About ToolKB",
+  description: "Learn how ToolKB securely compresses your images locally in your browser without any server uploads.",
 };
 
 export default function AboutPage() {
@@ -13,9 +13,9 @@ export default function AboutPage() {
       <header className="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)] pt-safe">
         <div className="h-14 px-margin flex items-center justify-between max-w-4xl mx-auto">
           <div className="flex items-center gap-space-sm">
-            <Image src="/logo.svg" alt="PhotoKB Brand Logo" width={160} height={44} className="h-8 w-auto object-contain" />
+            <Image src="/logo.svg" alt="ToolKB Brand Logo" width={160} height={44} className="h-8 w-auto object-contain" />
             <Link href="/" className="flex items-baseline tracking-tight">
-              <span className="font-headline-sm text-headline-sm text-primary">Photo</span>
+              <span className="font-headline-sm text-headline-sm text-primary">Tool</span>
               <span className="font-headline-sm text-headline-sm text-secondary ml-0.5">KB</span>
             </Link>
             <span className="hidden xs:inline-block font-mono-spec text-mono-spec uppercase text-on-surface-variant bg-surface-container-high px-space-xs py-0.5 rounded">v2.4</span>
@@ -31,7 +31,7 @@ export default function AboutPage() {
               <span className="font-mono-spec tracking-wider uppercase">ABOUT</span>
             </div>
             <h1 className="font-headline-lg text-headline-lg text-primary tracking-tight mt-1">
-              Why we built PhotoKB.
+              Why we built ToolKB.
             </h1>
             <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
               We were tired of uploading personal passport photos and handwritten signatures to random cloud servers just to shrink their file size by a few kilobytes.
@@ -44,7 +44,7 @@ export default function AboutPage() {
               Most online image compressors work by taking your photo, uploading it to a remote server, processing it with server-side tools, and then sending it back to you. This is fundamentally insecure for sensitive documents.
             </p>
             <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-              PhotoKB works differently. It uses modern HTML5 Canvas and JavaScript APIs to process the pixels directly inside your device&apos;s memory. When you select a photo, it is loaded into the browser tab, compressed locally, and saved directly to your hard drive. 
+              ToolKB works differently. It uses modern HTML5 Canvas and JavaScript APIs to process the pixels directly inside your device&apos;s memory. When you select a photo, it is loaded into the browser tab, compressed locally, and saved directly to your hard drive. 
             </p>
             <div className="p-space-md rounded-xl bg-surface-container-low shadow-sm border border-surface-container-highest mt-2">
               <h3 className="font-headline-sm text-headline-sm text-primary mb-2">Zero Server Architecture</h3>
