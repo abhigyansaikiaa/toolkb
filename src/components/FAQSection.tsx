@@ -10,19 +10,19 @@ interface FAQItem {
 const faqs: FAQItem[] = [
   {
     question: "How do I compress an image to 50 KB?",
-    answer: "Simply drop or select your photo, tap the 50 KB target button, and tap Compress. ToolKB's Image Compressor automatically optimizes the quantization tables so the final file lands safely under 50 KB without manual quality trials."
+    answer: "Simply drop or select your photo, tap the 50 KB target button, and tap Compress. ToolKB automatically optimizes the image so the final file lands safely under 50 KB without you having to guess quality settings."
   },
   {
     question: "Does ToolKB upload my photo to any server?",
-    answer: "No. All image encoding runs directly in your browser using client-side JavaScript. Your photos never leave your device, making it safe for ID cards and signatures."
+    answer: "No. All image processing runs directly in your browser. Your photos never leave your device, making it safe for ID cards and signatures."
   },
   {
     question: "Will compressing my photo reduce visible quality?",
-    answer: "ToolKB's Image Compressor utilizes progressive MozJPEG compression that discards redundant metadata and chrominance noise while preserving facial contours and text clarity. Unless compressed below 15 KB, faces stay crisp."
+    answer: "ToolKB compresses images smartly to preserve facial contours and text clarity while significantly reducing the file size. Unless compressed below 15 KB, your photos will stay crisp and perfectly readable."
   },
   {
     question: "Can I compress a photo down to 20 KB?",
-    answer: "Yes. Select the 20 KB preset. The compression pipeline automatically resizes oversized dimensions slightly if needed to ensure the file complies with strict 20 KB limits."
+    answer: "Yes. Select the 20 KB preset. The tool will automatically adjust the image slightly if needed to ensure the file complies with strict 20 KB limits."
   },
   {
     question: "Can I use ToolKB directly on mobile?",
@@ -40,12 +40,12 @@ export default function FAQSection() {
   return (
     <section className="flex flex-col gap-space-md mb-2">
       <div className="flex flex-col gap-1">
-        <span className="font-mono-spec text-mono-spec uppercase text-secondary font-bold tracking-wider">EDITORIAL GUIDE & FAQ</span>
+        <span className="font-mono-spec text-mono-spec uppercase text-secondary font-bold tracking-wider">FAQ</span>
         <h2 className="font-headline-lg text-headline-lg text-primary tracking-tight">
-          Compress an image to a specific size.
+          Common Questions
         </h2>
         <p className="font-body-md text-body-md text-on-surface-variant">
-          Everything you need to know about size ceilings, artifacts, and compliance standards.
+          Everything you need to know about preparing your files.
         </p>
       </div>
 

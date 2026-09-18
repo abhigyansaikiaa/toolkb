@@ -170,7 +170,7 @@ export default function CompressorApp({ defaultTargetKb = 50 }: { defaultTargetK
             <span>JPG · PNG · WEBP</span>
           </div>
           <span className="font-mono-spec text-[10px] text-on-surface-variant/80 tracking-wider">
-            NO SIGN-IN • NO WATERMARK • IN-BROWSER
+            NO SIGN-IN • NO WATERMARK • PRIVATE
           </span>
         </div>
       )}
@@ -200,7 +200,7 @@ export default function CompressorApp({ defaultTargetKb = 50 }: { defaultTargetK
               </p>
               <div className="inline-flex items-center gap-1 text-[11px] text-on-tertiary-container font-label-sm mt-1">
                 <span className="material-symbols-outlined text-[13px] text-on-tertiary-container">check_circle</span>
-                <span>Loaded & ready to shrink</span>
+                <span>Ready to shrink</span>
               </div>
             </div>
           </div>
@@ -224,8 +224,8 @@ export default function CompressorApp({ defaultTargetKb = 50 }: { defaultTargetK
               <path className="opacity-90" d="M4 24a20 20 0 0120-20V0C10.745 0 0 10.745 0 24h4zm2 5.291A7.962 7.962 0 014 24H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="currentColor"></path>
             </svg>
           </div>
-          <p className="font-headline-sm text-headline-sm text-primary mb-0.5">Compressing Image...</p>
-          <p className="font-body-sm text-body-sm text-on-surface-variant">Applying precise binary approximation</p>
+          <p className="font-headline-sm text-headline-sm text-primary mb-0.5">Compressing image...</p>
+          <p className="font-body-sm text-body-sm text-on-surface-variant">Preparing your file</p>
         </div>
       )}
 
@@ -235,9 +235,9 @@ export default function CompressorApp({ defaultTargetKb = 50 }: { defaultTargetK
             <div className="flex items-center justify-between">
               <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm">
                 <span className="material-symbols-outlined text-[14px]">check_circle</span>
-                <span className="font-bold">✓ Ready</span>
+                <span className="font-bold">Ready</span>
               </div>
-              <span className="font-mono-spec text-[11px] text-on-surface-variant">OUTPUT // VERIFIED</span>
+              <span className="font-mono-spec text-[11px] text-on-surface-variant">READY FOR UPLOAD</span>
             </div>
             
             <div className="flex items-baseline justify-between pt-1">

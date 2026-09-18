@@ -17,6 +17,7 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://toolkb.in"),
   title: "ToolKB — Free Online Tools for Files, Images & More",
   description: "Free online tools for compressing, resizing, converting and working with images, PDFs and files directly in your browser.",
 };
