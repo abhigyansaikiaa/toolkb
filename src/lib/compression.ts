@@ -8,17 +8,21 @@ export interface CompressionResult {
 /**
  * Compresses an image to fit within the targetKB limit using binary search for quality.
  * Falls back to dimension reduction if quality alone isn't enough.
+ *
+ * This function runs on the MAIN THREAD using HTMLCanvasElement.
+ * It is used as a fallback for browsers that do not support OffscreenCanvas.
+ * Prefer `compressImageSmart` for new call sites.
  */
 export async function compressImage(
   file: File,
-  targetKB: number
+  targetKB: number,
 ): Promise<CompressionResult> {
   const targetBytes = targetKB * 1024;
-  
+
   // Create an object URL and load image
   const img = new Image();
   const url = URL.createObjectURL(file);
-  
+
   await new Promise((resolve, reject) => {
     img.onload = resolve;
     img.onerror = reject;
@@ -28,7 +32,7 @@ export async function compressImage(
 
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
-  
+
   if (!ctx) {
     throw new Error("Canvas 2D context not supported");
   }
@@ -36,7 +40,7 @@ export async function compressImage(
   // Initial dimensions
   let currentWidth = img.width;
   let currentHeight = img.height;
-  
+
   // Set canvas size
   canvas.width = currentWidth;
   canvas.height = currentHeight;
@@ -51,14 +55,14 @@ export async function compressImage(
         canvas.height = height;
         ctx!.drawImage(img, 0, 0, width, height);
       }
-      
+
       canvas.toBlob(
         (blob) => {
           if (blob) resolve(blob);
           else reject(new Error("Blob creation failed"));
         },
         "image/jpeg",
-        quality
+        quality,
       );
     });
   };
@@ -67,17 +71,18 @@ export async function compressImage(
   let low = 0.1;
   let high = 0.95;
   let bestBlob: Blob | null = null;
-  
+
   // First check if high quality works immediately
   let blob = await getBlob(high, currentWidth, currentHeight);
   if (blob.size <= targetBytes) {
     bestBlob = blob;
   } else {
     // Perform binary search
-    for (let i = 0; i < 7; i++) { // 7 iterations provides good precision
+    for (let i = 0; i < 7; i++) {
+      // 7 iterations provides good precision
       const mid = (low + high) / 2;
       blob = await getBlob(mid, currentWidth, currentHeight);
-      
+
       if (blob.size <= targetBytes) {
         bestBlob = blob;
         low = mid; // Try for higher quality that still fits
@@ -93,10 +98,10 @@ export async function compressImage(
     while (scale > 0.1) {
       const w = Math.floor(currentWidth * scale);
       const h = Math.floor(currentHeight * scale);
-      
+
       // Try with a modest quality at the new dimensions
       blob = await getBlob(0.7, w, h);
-      
+
       if (blob.size <= targetBytes) {
         // We found a fitting scale. Let's do a quick binary search on quality here to maximize
         let qLow = 0.5;
@@ -123,16 +128,105 @@ export async function compressImage(
   // Cleanup memory
   canvas.width = 0;
   canvas.height = 0;
-  
+
   if (!bestBlob) {
     // If all else fails, do extreme compression
-    bestBlob = await getBlob(0.1, Math.floor(currentWidth * 0.5), Math.floor(currentHeight * 0.5));
+    bestBlob = await getBlob(
+      0.1,
+      Math.floor(currentWidth * 0.5),
+      Math.floor(currentHeight * 0.5),
+    );
   }
 
   return {
     blob: bestBlob,
     size: bestBlob.size,
     width: currentWidth,
-    height: currentHeight
+    height: currentHeight,
   };
+}
+
+/**
+ * Detects whether this browser supports running compression off-thread.
+ * Requires: OffscreenCanvas + Web Workers.
+ * Coverage: Chrome 69+, Firefox 105+, Safari 16.4+ (94%+ global as of 2024).
+ */
+function supportsOffscreenCanvas(): boolean {
+  return (
+    typeof Worker !== "undefined" &&
+    typeof OffscreenCanvas !== "undefined" &&
+    typeof createImageBitmap !== "undefined"
+  );
+}
+
+/**
+ * Compresses an image to the targetKB limit.
+ *
+ * Uses a Web Worker (OffscreenCanvas) when available so the main thread
+ * stays responsive during heavy compression. Falls back to the main-thread
+ * compressImage() in older browsers.
+ */
+export async function compressImageSmart(
+  file: File,
+  targetKB: number,
+): Promise<CompressionResult> {
+  if (!supportsOffscreenCanvas()) {
+    // Graceful fallback for older browsers (main-thread, same algorithm)
+    return compressImage(file, targetKB);
+  }
+
+  return new Promise<CompressionResult>((resolve, reject) => {
+    // Read the file as an ArrayBuffer so we can transfer it (zero-copy) to the worker.
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const buffer = reader.result as ArrayBuffer;
+
+      // Instantiate a fresh worker for each job.
+      // Workers are terminated immediately after the job completes to free memory.
+      const worker = new Worker(
+        new URL("./compression.worker.ts", import.meta.url),
+      );
+
+      const id = crypto.randomUUID();
+      let settled = false;
+
+      const cleanup = () => {
+        worker.terminate();
+      };
+
+      worker.onmessage = (event) => {
+        if (settled) return;
+        settled = true;
+        cleanup();
+
+        if (event.data.success) {
+          resolve({
+            blob: event.data.blob,
+            size: event.data.size,
+            width: event.data.width,
+            height: event.data.height,
+          });
+        } else {
+          reject(new Error(event.data.error ?? "Worker compression failed"));
+        }
+      };
+
+      worker.onerror = (err) => {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        reject(new Error(err.message ?? "Worker error"));
+      };
+
+      // Transfer the ArrayBuffer to the worker (zero-copy, buffer is neutered here).
+      worker.postMessage({ id, buffer, mimeType: file.type, targetKB }, [buffer]);
+    };
+
+    reader.onerror = () => {
+      reject(new Error("Failed to read file as ArrayBuffer"));
+    };
+
+    reader.readAsArrayBuffer(file);
+  });
 }

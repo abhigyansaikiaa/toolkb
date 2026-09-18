@@ -4,8 +4,45 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Compress Image to 50KB Online | ToolKB",
-  description: "Shrink your photo down to 50KB instantly. Perfect for job applications, passports, and online portals that require small file sizes.",
+  title: "Compress Image to 50KB Online Free",
+  description:
+    "Shrink any photo to 50KB free, no sign-up. Great for job applications, online profiles, and document portals. Works offline in your browser.",
+  alternates: { canonical: "https://toolkb.in/compress-image-to-50kb" },
+  openGraph: {
+    title: "Compress Image to 50KB Online Free",
+    description:
+      "Free 50KB image compressor. No uploads, no sign-up. Works in your browser — your photo never leaves your device.",
+    url: "https://toolkb.in/compress-image-to-50kb",
+    siteName: "ToolKB",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Compress Image to 50KB Free",
+    description: "Shrink any photo to 50KB. Free, no sign-up, runs in your browser.",
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://toolkb.in" },
+        { "@type": "ListItem", position: 2, name: "Compress Image", item: "https://toolkb.in/compress-image" },
+        { "@type": "ListItem", position: 3, name: "Compress to 50KB", item: "https://toolkb.in/compress-image-to-50kb" },
+      ],
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: "ToolKB 50KB Image Compressor",
+      applicationCategory: "MultimediaApplication",
+      operatingSystem: "Any",
+      url: "https://toolkb.in/compress-image-to-50kb",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    },
+  ],
 };
 
 export default function Page() {
@@ -13,49 +50,70 @@ export default function Page() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "ToolKB 50KB Image Compressor",
-            "operatingSystem": "Any",
-            "applicationCategory": "UtilitiesApplication",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD"
-            }
-          })
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <PageTemplate 
+      <PageTemplate
         h1="Compress Image to 50KB."
-        h2="Quickly shrink your photo to 50 KB for job portals, recruitment systems, and online applications."
+        h2="Free and private — shrink any photo to 50KB in your browser. No sign-up, no upload."
       >
         <CompressorApp defaultTargetKb={50} />
 
         <section className="flex flex-col gap-space-md mt-space-xl">
-          <h2 className="font-headline-md text-headline-md text-primary">Why compress an image to 50KB?</h2>
+          <h2 className="font-headline-md text-headline-md text-primary">
+            Why 50KB?
+          </h2>
           <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-            The 50 KB file limit is one of the most common requirements for online forms. Applicant Tracking Systems (ATS), corporate job portals, and online visa applications typically require your profile photo to be under 50 KB to save storage space on their end.
+            50KB is one of the most common upload limits for photographs in online forms. At this
+            size, a portrait photo retains very good quality — faces stay sharp, colours stay
+            accurate — while the file is small enough for almost any server or email attachment.
           </p>
           <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-            If you try to upload a standard photo taken from your phone, it will likely be rejected for being too large. This tool solves that problem instantly by compressing your file locally in your browser.
+            Common situations where 50KB is required or preferred:
           </p>
+          <ul className="flex flex-col gap-2 font-body-sm text-body-sm text-on-surface-variant list-disc pl-5">
+            <li>Job application portals and HR systems</li>
+            <li>Online recruitment platforms</li>
+            <li>Government employee onboarding forms</li>
+            <li>Educational institution admission portals</li>
+            <li>Profile photos on professional networks</li>
+          </ul>
 
-          <h2 className="font-headline-md text-headline-md text-primary mt-4">Will my photo still look good?</h2>
+          <h2 className="font-headline-md text-headline-md text-primary mt-4">
+            What to expect from a 50KB photo
+          </h2>
           <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-            Yes. A 50 KB target provides plenty of data to retain a high-quality, clear passport photo or headshot. Your face will remain perfectly recognizable, and the file will be accepted by the portal.
+            A standard passport-style headshot compressed to 50KB looks essentially identical to
+            the original at normal viewing sizes. The reduction in file size comes from removing
+            redundant data in the image, not from visible quality loss.
           </p>
+          <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            If you are compressing a high-detail scene (e.g. a landscape or a scanned document
+            with fine text), some detail may be lost. For portraits and headshots, 50KB is ample.
+          </p>
+        </section>
 
-          <div className="p-space-md rounded-xl bg-surface-container-low shadow-sm mt-4">
-            <h3 className="font-headline-sm text-headline-sm text-primary mb-2">Need a different size?</h3>
-            <ul className="flex flex-col gap-2 font-body-sm text-body-sm text-on-surface-variant">
-              <li><Link href="/compress-image-to-20kb" className="text-secondary hover:underline">Compress image to 20KB</Link></li>
-              <li><Link href="/compress-image-to-100kb" className="text-secondary hover:underline">Compress image to 100KB</Link></li>
-              <li><Link href="/signature-to-50kb" className="text-secondary hover:underline">Compress signature to 50KB</Link></li>
-            </ul>
-          </div>
+        <section className="p-space-md rounded-xl bg-surface-container-low shadow-sm mt-space-md">
+          <h2 className="font-headline-sm text-headline-sm text-primary mb-3">
+            Other size targets
+          </h2>
+          <ul className="flex flex-wrap gap-2 list-none p-0 m-0">
+            {[
+              { href: "/compress-image-to-20kb", label: "20KB" },
+              { href: "/compress-image-to-100kb", label: "100KB" },
+              { href: "/compress-image-to-200kb", label: "200KB" },
+              { href: "/signature-to-50kb", label: "Signature to 50KB" },
+              { href: "/india-photo-size-requirements", label: "India upload guide →" },
+            ].map(({ href, label }) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className="inline-block px-3 py-1.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-colors"
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </section>
       </PageTemplate>
     </>

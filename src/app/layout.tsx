@@ -18,8 +18,33 @@ const newsreader = Newsreader({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://toolkb.in"),
-  title: "ToolKB — Free Online Tools for Files, Images & More",
-  description: "Free online tools for compressing, resizing, converting and working with images, PDFs and files directly in your browser.",
+  title: {
+    default: "ToolKB — Free Online File & Image Tools",
+    template: "%s | ToolKB",
+  },
+  description:
+    "Free online tools for compressing, resizing, and preparing images and files directly in your browser. No sign-up. No uploads.",
+  keywords: ["image compressor", "compress photo", "reduce file size", "free online tool"],
+  authors: [{ name: "ToolKB" }],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  openGraph: {
+    type: "website",
+    siteName: "ToolKB",
+    title: "ToolKB — Free Online File & Image Tools",
+    description:
+      "Free online tools for compressing, resizing, and preparing images and files. Runs in your browser — your files never leave your device.",
+    url: "https://toolkb.in",
+  },
+  twitter: {
+    card: "summary",
+    title: "ToolKB — Free Online File & Image Tools",
+    description:
+      "Compress photos to any KB target. Free, no sign-up, fully in-browser.",
+  },
 };
 
 export default function RootLayout({

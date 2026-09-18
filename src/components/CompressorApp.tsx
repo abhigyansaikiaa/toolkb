@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { compressImage, CompressionResult } from "@/lib/compression";
+import { compressImageSmart, CompressionResult } from "@/lib/compression";
 
 export default function CompressorApp({ defaultTargetKb = 50 }: { defaultTargetKb?: number }) {
   const [targetKb, setTargetKb] = useState(defaultTargetKb);
@@ -38,7 +38,7 @@ export default function CompressorApp({ defaultTargetKb = 50 }: { defaultTargetK
       // Small timeout to allow UI to update to "compressing" state before thread blocks
       await new Promise(resolve => setTimeout(resolve, 50));
       
-      const compResult = await compressImage(file, targetKb);
+      const compResult = await compressImageSmart(file, targetKb);
       setResult(compResult);
       setStatus("ready");
     } catch (err) {

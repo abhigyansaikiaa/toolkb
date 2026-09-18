@@ -4,8 +4,45 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Compress Image to 100KB Online | ToolKB",
-  description: "Reduce your image size to 100KB quickly and privately. Ideal for college admissions, ID cards, and web uploads.",
+  title: "Compress Image to 100KB Online Free",
+  description:
+    "Reduce any image to 100KB free, no sign-up. Ideal for college admissions, document portals, and ID photos. Runs in your browser — no uploads.",
+  alternates: { canonical: "https://toolkb.in/compress-image-to-100kb" },
+  openGraph: {
+    title: "Compress Image to 100KB Online Free",
+    description:
+      "Free 100KB image compressor. No uploads, no sign-up. Works in your browser — safe for ID photos.",
+    url: "https://toolkb.in/compress-image-to-100kb",
+    siteName: "ToolKB",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Compress Image to 100KB Free",
+    description: "Reduce any photo to 100KB. Free, no sign-up, runs in your browser.",
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://toolkb.in" },
+        { "@type": "ListItem", position: 2, name: "Compress Image", item: "https://toolkb.in/compress-image" },
+        { "@type": "ListItem", position: 3, name: "Compress to 100KB", item: "https://toolkb.in/compress-image-to-100kb" },
+      ],
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: "ToolKB 100KB Image Compressor",
+      applicationCategory: "MultimediaApplication",
+      operatingSystem: "Any",
+      url: "https://toolkb.in/compress-image-to-100kb",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    },
+  ],
 };
 
 export default function Page() {
@@ -13,49 +50,66 @@ export default function Page() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "ToolKB 100KB Image Compressor",
-            "operatingSystem": "Any",
-            "applicationCategory": "UtilitiesApplication",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD"
-            }
-          })
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <PageTemplate 
+      <PageTemplate
         h1="Compress Image to 100KB."
-        h2="Shrink your photo to 100 KB for university admissions, ID card generation, and general web forms."
+        h2="Free and private — shrink any photo to 100KB in your browser. No sign-up, no upload."
       >
         <CompressorApp defaultTargetKb={100} />
 
         <section className="flex flex-col gap-space-md mt-space-xl">
-          <h2 className="font-headline-md text-headline-md text-primary">Why compress an image to 100KB?</h2>
+          <h2 className="font-headline-md text-headline-md text-primary">
+            When is 100KB the right target?
+          </h2>
           <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-            A 100 KB limit is widely used by university admission portals, employee ID card systems, and forum profile pictures. It provides an excellent balance—the file size is small enough to load instantly, but large enough to retain excellent visual quality.
+            100KB is a practical middle ground — small enough to upload quickly and meet most
+            portal requirements, but large enough to preserve excellent image quality. At 100KB,
+            even a photo with fine detail (text, patterns, document scans) will look clear and
+            sharp.
           </p>
           <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-            Instead of manually exporting your photos through desktop software and guessing the quality slider until it hits 100 KB, you can use this tool to automatically hit the target size in one click.
+            Typical situations where 100KB limits apply:
           </p>
+          <ul className="flex flex-col gap-2 font-body-sm text-body-sm text-on-surface-variant list-disc pl-5">
+            <li>University and college admission form portals</li>
+            <li>Employee ID card generation systems</li>
+            <li>Medical and healthcare facility portals</li>
+            <li>Library card and institutional registration forms</li>
+            <li>Online membership applications</li>
+          </ul>
 
-          <h2 className="font-headline-md text-headline-md text-primary mt-4">Is it safe to upload my ID photo here?</h2>
+          <h2 className="font-headline-md text-headline-md text-primary mt-4">
+            Is it safe to compress a sensitive photo here?
+          </h2>
           <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-            Absolutely. We built ToolKB so that your files never have to leave your device. The entire compression process happens right here in your browser tab. There are no servers, no uploads, and no privacy risks.
+            Yes. ToolKB compresses images entirely within your browser. The photo is never
+            transmitted to any server. If you are compressing an ID card photo, a medical image,
+            or any other sensitive document, it stays on your device throughout the process.
           </p>
+        </section>
 
-          <div className="p-space-md rounded-xl bg-surface-container-low shadow-sm mt-4">
-            <h3 className="font-headline-sm text-headline-sm text-primary mb-2">Need a different size?</h3>
-            <ul className="flex flex-col gap-2 font-body-sm text-body-sm text-on-surface-variant">
-              <li><Link href="/compress-image-to-50kb" className="text-secondary hover:underline">Compress image to 50KB</Link></li>
-              <li><Link href="/compress-image-to-200kb" className="text-secondary hover:underline">Compress image to 200KB</Link></li>
-              <li><Link href="/resize-image" className="text-secondary hover:underline">Resize image dimensions</Link></li>
-            </ul>
-          </div>
+        <section className="p-space-md rounded-xl bg-surface-container-low shadow-sm mt-space-md">
+          <h2 className="font-headline-sm text-headline-sm text-primary mb-3">
+            Other size targets
+          </h2>
+          <ul className="flex flex-wrap gap-2 list-none p-0 m-0">
+            {[
+              { href: "/compress-image-to-20kb", label: "20KB" },
+              { href: "/compress-image-to-50kb", label: "50KB" },
+              { href: "/compress-image-to-200kb", label: "200KB" },
+              { href: "/signature-compressor", label: "Compress Signature" },
+            ].map(({ href, label }) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className="inline-block px-3 py-1.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-colors"
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </section>
       </PageTemplate>
     </>

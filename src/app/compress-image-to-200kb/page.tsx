@@ -4,8 +4,45 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Compress Image to 200KB Online | ToolKB",
-  description: "Compress your high-resolution photos down to 200KB without losing visible quality. Fast, free, and private.",
+  title: "Compress Image to 200KB Online Free",
+  description:
+    "Compress any photo to 200KB free, no sign-up. Great for document uploads, high-quality profiles, and bank KYC forms. Runs in your browser.",
+  alternates: { canonical: "https://toolkb.in/compress-image-to-200kb" },
+  openGraph: {
+    title: "Compress Image to 200KB Online Free",
+    description:
+      "Free 200KB image compressor. No uploads, no sign-up. Excellent quality retained at 200KB.",
+    url: "https://toolkb.in/compress-image-to-200kb",
+    siteName: "ToolKB",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Compress Image to 200KB Free",
+    description: "Reduce any photo to 200KB. Free, no sign-up, runs in your browser.",
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://toolkb.in" },
+        { "@type": "ListItem", position: 2, name: "Compress Image", item: "https://toolkb.in/compress-image" },
+        { "@type": "ListItem", position: 3, name: "Compress to 200KB", item: "https://toolkb.in/compress-image-to-200kb" },
+      ],
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: "ToolKB 200KB Image Compressor",
+      applicationCategory: "MultimediaApplication",
+      operatingSystem: "Any",
+      url: "https://toolkb.in/compress-image-to-200kb",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    },
+  ],
 };
 
 export default function Page() {
@@ -13,49 +50,63 @@ export default function Page() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "ToolKB 200KB Image Compressor",
-            "operatingSystem": "Any",
-            "applicationCategory": "UtilitiesApplication",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD"
-            }
-          })
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <PageTemplate 
+      <PageTemplate
         h1="Compress Image to 200KB."
-        h2="Shrink high-resolution photos down to 200 KB while preserving excellent clarity and detail."
+        h2="Free and private — reduce any photo to 200KB in your browser. No sign-up, no upload."
       >
         <CompressorApp defaultTargetKb={200} />
 
         <section className="flex flex-col gap-space-md mt-space-xl">
-          <h2 className="font-headline-md text-headline-md text-primary">Why compress an image to 200KB?</h2>
+          <h2 className="font-headline-md text-headline-md text-primary">
+            200KB — a high-quality target
+          </h2>
           <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-            The 200 KB limit is commonly used for document uploads, scanned certificates, and high-quality profile photos. At 200 KB, you can easily read text on a scanned document (like an ID card, transcript, or medical record), making it the perfect size for official submissions.
+            At 200KB, images retain excellent visual quality. Even scanned documents, certificates,
+            and photos with text remain sharp and fully readable. This makes 200KB a common
+            requirement for:
           </p>
-          <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-            Taking a photo of a document with your phone often results in a 4 MB file. This tool safely compresses that large photo into a compact 200 KB file without sending your sensitive document over the internet.
-          </p>
+          <ul className="flex flex-col gap-2 font-body-sm text-body-sm text-on-surface-variant list-disc pl-5">
+            <li>Bank KYC (Know Your Customer) document submissions</li>
+            <li>High-resolution profile photos for professional portals</li>
+            <li>Scanned certificates and transcripts attached to applications</li>
+            <li>Medical and health-related document portals</li>
+            <li>Real estate and legal document management systems</li>
+          </ul>
 
-          <h2 className="font-headline-md text-headline-md text-primary mt-4">What file formats are supported?</h2>
+          <h2 className="font-headline-md text-headline-md text-primary mt-4">
+            Compressing scanned documents
+          </h2>
           <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-            You can drop any standard image file format here: JPG, PNG, or WebP. The tool will process it instantly and provide a compressed file ready to be attached to an email or uploaded to a form.
+            If you have photographed a document with your phone, the resulting file is typically
+            3–8MB. This tool will compress it to 200KB while keeping text readable and details
+            visible. For best results, ensure the original photo is well-lit and not blurry before
+            compressing — compression cannot recover a blurry source image.
           </p>
+        </section>
 
-          <div className="p-space-md rounded-xl bg-surface-container-low shadow-sm mt-4">
-            <h3 className="font-headline-sm text-headline-sm text-primary mb-2">Need a different size?</h3>
-            <ul className="flex flex-col gap-2 font-body-sm text-body-sm text-on-surface-variant">
-              <li><Link href="/compress-image-to-100kb" className="text-secondary hover:underline">Compress image to 100KB</Link></li>
-              <li><Link href="/compress-image-to-50kb" className="text-secondary hover:underline">Compress image to 50KB</Link></li>
-              <li><Link href="/resize-image" className="text-secondary hover:underline">Resize image dimensions</Link></li>
-            </ul>
-          </div>
+        <section className="p-space-md rounded-xl bg-surface-container-low shadow-sm mt-space-md">
+          <h2 className="font-headline-sm text-headline-sm text-primary mb-3">
+            Other size targets
+          </h2>
+          <ul className="flex flex-wrap gap-2 list-none p-0 m-0">
+            {[
+              { href: "/compress-image-to-20kb", label: "20KB" },
+              { href: "/compress-image-to-50kb", label: "50KB" },
+              { href: "/compress-image-to-100kb", label: "100KB" },
+              { href: "/signature-compressor", label: "Compress Signature" },
+            ].map(({ href, label }) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className="inline-block px-3 py-1.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-colors"
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </section>
       </PageTemplate>
     </>
