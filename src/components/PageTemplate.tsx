@@ -98,7 +98,7 @@ export default function PageTemplate({ h1, h2, children }: PageTemplateProps) {
         </div>
 
         {/* Footer */}
-        <footer className="mt-space-xl pt-space-lg pb-space-lg flex flex-col items-center text-center gap-space-md">
+        <footer className="mt-space-xl pt-space-lg pb-space-lg flex flex-col items-center text-center gap-space-md border-t border-surface-container-high">
           <Image
             src="/logo.png"
             alt="ToolKB — free online file tools"
@@ -107,7 +107,8 @@ export default function PageTemplate({ h1, h2, children }: PageTemplateProps) {
             className="h-6 w-auto object-contain opacity-80"
           />
           <p className="font-body-sm text-body-sm text-on-surface-variant italic">Make your files fit.</p>
-          <nav aria-label="Footer navigation">
+          
+          <nav aria-label="Footer main navigation">
             <ul className="flex flex-wrap justify-center gap-x-space-md gap-y-space-xs max-w-sm font-label-sm text-label-sm text-on-surface-variant list-none p-0 m-0">
               <li><Link href="/compress-image" className="hover:text-primary transition-colors">Compress Image</Link></li>
               <li><Link href="/compress-image-to-20kb" className="hover:text-primary transition-colors">To 20KB</Link></li>
@@ -120,7 +121,23 @@ export default function PageTemplate({ h1, h2, children }: PageTemplateProps) {
               <li><Link href="/about" className="hover:text-primary transition-colors">About</Link></li>
             </ul>
           </nav>
-          <p className="font-mono-spec text-mono-spec text-on-surface-variant/80 mt-space-xs">© 2026 ToolKB</p>
+          
+          <div className="w-16 h-px bg-outline-variant/30 my-2"></div>
+
+          <nav aria-label="Legal & Trust navigation">
+            <p className="font-label-sm font-bold text-on-surface mb-3">Legal & Trust</p>
+            <ul className="flex flex-wrap justify-center gap-x-4 gap-y-2 max-w-md font-label-sm text-label-sm text-on-surface-variant list-none p-0 m-0">
+              <li><Link href="/privacy" className="hover:text-primary transition-colors">Privacy</Link></li>
+              <li><Link href="/terms" className="hover:text-primary transition-colors">Terms</Link></li>
+              <li><Link href="/cookie-policy" className="hover:text-primary transition-colors">Cookie Policy</Link></li>
+              <li><Link href="/disclaimer" className="hover:text-primary transition-colors">Disclaimer</Link></li>
+              <li><Link href="/acceptable-use" className="hover:text-primary transition-colors">Acceptable Use</Link></li>
+              <li><Link href="/security" className="hover:text-primary transition-colors">Security</Link></li>
+              <li><Link href="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
+            </ul>
+          </nav>
+
+          <p className="font-mono-spec text-[10px] text-on-surface-variant/80 mt-space-xs uppercase tracking-wider">© 2026 ToolKB</p>
         </footer>
       </main>
 
