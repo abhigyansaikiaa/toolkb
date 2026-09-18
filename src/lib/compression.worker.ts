@@ -11,6 +11,17 @@
 
 /* eslint-disable no-restricted-globals */
 
+import {
+  MAX_IMAGE_WIDTH,
+  MAX_IMAGE_HEIGHT,
+  MAX_IMAGE_PIXELS,
+  ALLOWED_MIME_TYPES,
+  MIN_TARGET_KB,
+  MAX_TARGET_KB,
+  MAX_COMPRESSION_ITERATIONS,
+  MAX_RESIZE_ITERATIONS
+} from "./security";
+
 interface CompressionRequest {
   id: string;
   buffer: ArrayBuffer;
@@ -37,6 +48,16 @@ self.onmessage = async (event: MessageEvent<CompressionRequest>) => {
   const { id, buffer, mimeType, targetKB } = event.data;
 
   try {
+    if (!id || !buffer || !(buffer instanceof ArrayBuffer)) {
+      throw new Error("Invalid worker message payload.");
+    }
+    if (!ALLOWED_MIME_TYPES.includes(mimeType)) {
+      throw new Error("Unsupported file type.");
+    }
+    if (typeof targetKB !== "number" || isNaN(targetKB) || targetKB < MIN_TARGET_KB || targetKB > MAX_TARGET_KB) {
+      throw new Error(`Target KB must be a valid number between ${MIN_TARGET_KB} and ${MAX_TARGET_KB}.`);
+    }
+
     const result = await compress(buffer, mimeType, targetKB);
     // Blob cannot be transferred (it's not a Transferable), so it is structured-cloned.
     self.postMessage({ id, success: true, ...result } as CompressionSuccess);
@@ -60,6 +81,11 @@ async function compress(
   // createImageBitmap is available in workers and handles JPEG/PNG/WebP natively.
   const sourceBlob = new Blob([buffer], { type: mimeType });
   const imageBitmap = await createImageBitmap(sourceBlob);
+
+  try {
+    if (imageBitmap.width > MAX_IMAGE_WIDTH || imageBitmap.height > MAX_IMAGE_HEIGHT || (imageBitmap.width * imageBitmap.height) > MAX_IMAGE_PIXELS) {
+      throw new Error("Image dimensions exceed the maximum allowed limits (Decompression bomb protection).");
+    }
 
   let currentWidth = imageBitmap.width;
   let currentHeight = imageBitmap.height;
@@ -105,8 +131,8 @@ async function compress(
   if (blob.size <= targetBytes) {
     bestBlob = blob;
   } else {
-    // 7 iterations ≈ quality resolution of ~0.007, enough for any use case
-    for (let i = 0; i < 7; i++) {
+    const iterations = Math.min(7, MAX_COMPRESSION_ITERATIONS);
+    for (let i = 0; i < iterations; i++) {
       const mid = (low + high) / 2;
       blob = await getBlob(mid, currentWidth, currentHeight);
       if (blob.size <= targetBytes) {
@@ -121,7 +147,8 @@ async function compress(
   // ─── Step 2: Dimension fallback if quality search wasn't sufficient ────────
   if (!bestBlob || bestBlob.size > targetBytes) {
     let scale = 0.9;
-    while (scale > 0.1) {
+    let resizeCount = 0;
+    while (scale > 0.1 && resizeCount < MAX_RESIZE_ITERATIONS) {
       const w = Math.floor(currentWidth * scale);
       const h = Math.floor(currentHeight * scale);
 
@@ -147,12 +174,9 @@ async function compress(
         break;
       }
       scale -= 0.1;
+      resizeCount++;
     }
   }
-
-  // ─── Release the ImageBitmap before any final fallback ────────────────────
-  // After this point we do not draw from imageBitmap again.
-  imageBitmap.close();
 
   // ─── Step 3: Last-resort extreme compression ──────────────────────────────
   // If the image still doesn't fit (extremely large or tiny target), compress
@@ -176,4 +200,9 @@ async function compress(
     width: currentWidth,
     height: currentHeight,
   };
+  } finally {
+    // ─── Release the ImageBitmap before finishing ────────────────────
+    // Ensure cleanup always happens even if errors are thrown.
+    imageBitmap.close();
+  }
 }

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { compressImageSmart, CompressionResult } from "@/lib/compression";
+import { MAX_IMAGE_SIZE_BYTES, ALLOWED_MIME_TYPES, MIN_TARGET_KB, MAX_TARGET_KB } from "@/lib/security";
 
 export default function CompressorApp({ defaultTargetKb = 50 }: { defaultTargetKb?: number }) {
   const [targetKb, setTargetKb] = useState(defaultTargetKb);
@@ -18,10 +19,21 @@ export default function CompressorApp({ defaultTargetKb = 50 }: { defaultTargetK
     const selectedFile = e.target.files?.[0];
     if (!selectedFile) return;
 
-    if (!["image/jpeg", "image/png", "image/webp"].includes(selectedFile.type)) {
+    if (!ALLOWED_MIME_TYPES.includes(selectedFile.type)) {
       setErrorMessage("That file format isn't supported here. Please choose a JPG, PNG, or WebP photo.");
       setStatus("error");
       return;
+    }
+
+    if (selectedFile.size > MAX_IMAGE_SIZE_BYTES) {
+      setErrorMessage(`File is too large. Maximum allowed size is ${MAX_IMAGE_SIZE_BYTES / (1024 * 1024)} MB.`);
+      setStatus("error");
+      return;
+    }
+
+    // Cleanup previous object URL if one exists
+    if (filePreview) {
+      URL.revokeObjectURL(filePreview);
     }
 
     setFile(selectedFile);
@@ -30,8 +42,26 @@ export default function CompressorApp({ defaultTargetKb = 50 }: { defaultTargetK
     setResult(null);
   };
 
+  // Safe object URL lifecycle management (cleanup on unmount)
+  useEffect(() => {
+    return () => {
+      if (filePreview) {
+        URL.revokeObjectURL(filePreview);
+      }
+    };
+  }, [filePreview]);
+
   const startCompression = async () => {
     if (!file) return;
+    
+    // Final sanity check before passing to processing
+    const safeTargetKb = targetKb;
+    if (isNaN(safeTargetKb) || safeTargetKb < MIN_TARGET_KB || safeTargetKb > MAX_TARGET_KB) {
+      setErrorMessage(`Target size must be between ${MIN_TARGET_KB} KB and ${MAX_TARGET_KB} KB.`);
+      setStatus("error");
+      return;
+    }
+
     setStatus("compressing");
     
     try {
@@ -75,14 +105,15 @@ export default function CompressorApp({ defaultTargetKb = 50 }: { defaultTargetK
     const val = e.target.value;
     setCustomKb(val);
     const parsed = parseInt(val, 10);
-    if (!isNaN(parsed) && parsed > 0) {
+    // Only update active targetKb if it's a valid number within bounds
+    if (!isNaN(parsed) && parsed >= MIN_TARGET_KB && parsed <= MAX_TARGET_KB) {
       setTargetKb(parsed);
     }
   };
 
   const adjustCustomKb = (delta: number) => {
     let parsed = parseInt(customKb, 10) || targetKb;
-    parsed = Math.max(5, Math.min(5000, parsed + delta));
+    parsed = Math.max(MIN_TARGET_KB, Math.min(MAX_TARGET_KB, parsed + delta));
     setCustomKb(parsed.toString());
     setTargetKb(parsed);
   };
@@ -131,8 +162,8 @@ export default function CompressorApp({ defaultTargetKb = 50 }: { defaultTargetK
                 value={customKb}
                 onChange={handleCustomKbChange}
                 placeholder={targetKb.toString()}
-                min="5" 
-                max="5000" 
+                min={MIN_TARGET_KB} 
+                max={MAX_TARGET_KB} 
               />
               <span className="font-mono-spec text-mono-spec text-on-surface-variant">KB</span>
             </div>

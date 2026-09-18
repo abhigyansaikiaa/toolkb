@@ -5,6 +5,18 @@ export interface CompressionResult {
   height: number;
 }
 
+import {
+  MAX_IMAGE_WIDTH,
+  MAX_IMAGE_HEIGHT,
+  MAX_IMAGE_PIXELS,
+  ALLOWED_MIME_TYPES,
+  MAX_IMAGE_SIZE_BYTES,
+  MIN_TARGET_KB,
+  MAX_TARGET_KB,
+  MAX_COMPRESSION_ITERATIONS,
+  MAX_RESIZE_ITERATIONS
+} from "./security";
+
 /**
  * Compresses an image to fit within the targetKB limit using binary search for quality.
  * Falls back to dimension reduction if quality alone isn't enough.
@@ -17,18 +29,35 @@ export async function compressImage(
   file: File,
   targetKB: number,
 ): Promise<CompressionResult> {
+  if (file.size > MAX_IMAGE_SIZE_BYTES) {
+    throw new Error(`File is too large. Maximum allowed size is ${MAX_IMAGE_SIZE_BYTES / (1024 * 1024)} MB.`);
+  }
+  if (!ALLOWED_MIME_TYPES.includes(file.type)) {
+    throw new Error("Unsupported file type.");
+  }
+  if (targetKB < MIN_TARGET_KB || targetKB > MAX_TARGET_KB) {
+    throw new Error(`Target KB must be between ${MIN_TARGET_KB} and ${MAX_TARGET_KB}.`);
+  }
+
   const targetBytes = targetKB * 1024;
 
   // Create an object URL and load image
-  const img = new Image();
+  let img = new Image();
   const url = URL.createObjectURL(file);
 
-  await new Promise((resolve, reject) => {
-    img.onload = resolve;
-    img.onerror = reject;
-    img.src = url;
-  });
-  URL.revokeObjectURL(url);
+  try {
+    await new Promise((resolve, reject) => {
+      img.onload = resolve;
+      img.onerror = reject;
+      img.src = url;
+    });
+
+    if (img.width > MAX_IMAGE_WIDTH || img.height > MAX_IMAGE_HEIGHT || (img.width * img.height) > MAX_IMAGE_PIXELS) {
+      throw new Error("Image dimensions exceed the maximum allowed limits (Decompression bomb protection).");
+    }
+  } finally {
+    URL.revokeObjectURL(url);
+  }
 
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
@@ -77,8 +106,9 @@ export async function compressImage(
   if (blob.size <= targetBytes) {
     bestBlob = blob;
   } else {
-    // Perform binary search
-    for (let i = 0; i < 7; i++) {
+    // Perform binary search. Bounded to MAX_COMPRESSION_ITERATIONS (e.g. 7).
+    const iterations = Math.min(7, MAX_COMPRESSION_ITERATIONS);
+    for (let i = 0; i < iterations; i++) {
       // 7 iterations provides good precision
       const mid = (low + high) / 2;
       blob = await getBlob(mid, currentWidth, currentHeight);
@@ -95,7 +125,8 @@ export async function compressImage(
   // 2. Fallback: Reduce dimensions if quality drop wasn't enough
   if (!bestBlob || bestBlob.size > targetBytes) {
     let scale = 0.9;
-    while (scale > 0.1) {
+    let resizeCount = 0;
+    while (scale > 0.1 && resizeCount < MAX_RESIZE_ITERATIONS) {
       const w = Math.floor(currentWidth * scale);
       const h = Math.floor(currentHeight * scale);
 
@@ -122,12 +153,16 @@ export async function compressImage(
         break;
       }
       scale -= 0.1;
+      resizeCount++;
     }
   }
 
   // Cleanup memory
   canvas.width = 0;
   canvas.height = 0;
+  img.src = "";
+  // @ts-expect-error - Help GC
+  img = null;
 
   if (!bestBlob) {
     // If all else fails, do extreme compression
@@ -170,6 +205,16 @@ export async function compressImageSmart(
   file: File,
   targetKB: number,
 ): Promise<CompressionResult> {
+  if (file.size > MAX_IMAGE_SIZE_BYTES) {
+    throw new Error(`File is too large. Maximum allowed size is ${MAX_IMAGE_SIZE_BYTES / (1024 * 1024)} MB.`);
+  }
+  if (!ALLOWED_MIME_TYPES.includes(file.type)) {
+    throw new Error("Unsupported file type.");
+  }
+  if (targetKB < MIN_TARGET_KB || targetKB > MAX_TARGET_KB) {
+    throw new Error(`Target KB must be between ${MIN_TARGET_KB} and ${MAX_TARGET_KB}.`);
+  }
+
   if (!supportsOffscreenCanvas()) {
     // Graceful fallback for older browsers (main-thread, same algorithm)
     return compressImage(file, targetKB);
