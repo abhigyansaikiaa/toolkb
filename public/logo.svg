@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 44" fill="none">
+  <!-- Custom Logo Mark: Photo Frame + Compression Inward Arrows + Tiny KB file indicator -->
+  <g transform="translate(4, 4)">
+    <!-- Outer frame representing photo boundary with soft corner -->
+    <rect x="0" y="0" width="36" height="36" rx="8" fill="#F1EEE7" stroke="#171717" stroke-width="2"/>
+    <!-- Subtle photo horizon line / corner indicator -->
+    <path d="M6 26L14 18L21 24L26 19L30 23" stroke="#6E6A63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+    <!-- Inward compression arrows -->
+    <path d="M12 18H24" stroke="#F26B38" stroke-width="2" stroke-linecap="round"/>
+    <path d="M15 15L12 18L15 21" stroke="#F26B38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M21 15L24 18L21 21" stroke="#F26B38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Tiny KB tag badge at corner -->
+    <rect x="18" y="24" width="16" height="10" rx="3" fill="#171717"/>
+    <text x="26" y="31.5" fill="#FAF8F3" font-family="'Manrope', sans-serif" font-size="6.5" font-weight="800" text-anchor="middle" letter-spacing="0.2">KB</text>
+  </g>
+  <!-- Wordmark: Photo (Ink Black #171717) + KB (Persimmon Orange #F26B38) -->
+  <text x="50" y="27" font-family="'Manrope', sans-serif" font-size="22" font-weight="800" letter-spacing="-0.5">
+    <tspan fill="#171717">Photo</tspan><tspan fill="#F26B38">KB</tspan>
+  </text>
+</svg>
