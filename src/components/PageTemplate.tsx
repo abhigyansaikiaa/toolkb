@@ -138,10 +138,6 @@ export default function PageTemplate({ h1, h2, children }: PageTemplateProps) {
             </ul>
           </nav>
 
-          <div className="mt-2 font-label-sm text-label-sm text-on-surface-variant flex flex-col items-center gap-1">
-            <span>Contact Support: <a href={`mailto:${LEGAL_CONFIG.CONTACT_EMAIL}`} className="hover:text-primary transition-colors font-bold text-on-surface">{LEGAL_CONFIG.CONTACT_EMAIL}</a></span>
-          </div>
-
           <p className="font-mono-spec text-[10px] text-on-surface-variant/80 mt-space-xs uppercase tracking-wider">© 2026 ToolKB</p>
         </footer>
       </main>
