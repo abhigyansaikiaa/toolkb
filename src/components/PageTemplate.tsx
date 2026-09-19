@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { LEGAL_CONFIG } from "@/lib/legal-config";
 
 interface PageTemplateProps {
   h1: string;
