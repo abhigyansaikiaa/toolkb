@@ -4,22 +4,22 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Compress Image to 50KB Online Free",
+  title: "Compress Image to 50KB Online Free | ToolKB",
   description:
-    "Shrink any photo to 50KB free, no sign-up. Great for job applications, online profiles, and document portals. Works offline in your browser.",
+    "Shrink any image to 50KB free, no sign-up. Great for job applications, profiles, and document portals. JPG, PNG, WebP. Processed in your browser.",
   alternates: { canonical: "https://toolkb.in/compress-image-to-50kb" },
   openGraph: {
-    title: "Compress Image to 50KB Online Free",
+    title: "Compress Image to 50KB Online Free | ToolKB",
     description:
-      "Free 50KB image compressor. No uploads, no sign-up. Works in your browser — your photo never leaves your device.",
+      "Free 50KB image compressor. No sign-up. Your photo is processed in your browser — it never leaves your device.",
     url: "https://toolkb.in/compress-image-to-50kb",
     siteName: "ToolKB",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Compress Image to 50KB Free",
-    description: "Shrink any photo to 50KB. Free, no sign-up, runs in your browser.",
+    title: "Compress Image to 50KB Free | ToolKB",
+    description: "Shrink any photo to 50KB. Free, no sign-up, processed in your browser.",
   },
 };
 
@@ -98,11 +98,11 @@ export default function Page() {
           </h2>
           <ul className="flex flex-wrap gap-2 list-none p-0 m-0">
             {[
+              { href: "/compress-image", label: "Any size (custom KB)" },
               { href: "/compress-image-to-20kb", label: "20KB" },
               { href: "/compress-image-to-100kb", label: "100KB" },
               { href: "/compress-image-to-200kb", label: "200KB" },
               { href: "/signature-to-50kb", label: "Signature to 50KB" },
-              { href: "/india-photo-size-requirements", label: "India upload guide →" },
             ].map(({ href, label }) => (
               <li key={href}>
                 <Link

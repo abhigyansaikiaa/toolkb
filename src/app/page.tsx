@@ -5,22 +5,22 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Free Photo Compressor — Compress to Any KB Online",
+  title: "ToolKB — Free Online Image Compressor & File Tools",
   description:
-    "Compress JPG, PNG, or WebP images to any target size — 20KB, 50KB, 100KB, 200KB or custom. Free, no sign-up. Runs entirely in your browser.",
+    "Compress images to an exact KB target — 20KB, 50KB, 100KB, 200KB or any custom size. Free, no sign-up. Your image is processed in your browser.",
   alternates: { canonical: "https://toolkb.in" },
   openGraph: {
-    title: "Free Photo Compressor — Compress to Any KB Online",
+    title: "ToolKB — Free Online Image Compressor & File Tools",
     description:
-      "Free image compressor that runs in your browser. Set any file size target. No uploads, no sign-up.",
+      "Set any KB target and compress your image instantly. Free, no sign-up. Your image is processed in your browser.",
     url: "https://toolkb.in",
     siteName: "ToolKB",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Free Photo Compressor",
-    description: "Compress images to any KB target. Free, no sign-up, fully in-browser.",
+    title: "ToolKB — Free Image Compressor",
+    description: "Compress images to any KB target. Free, no sign-up, processed in your browser.",
   },
 };
 
@@ -33,16 +33,7 @@ const jsonLd = {
       "url": "https://toolkb.in",
     },
     {
-      "@type": "Organization",
-      "name": "ToolKB",
-      "url": "https://toolkb.in",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://toolkb.in/logo.png",
-      },
-    },
-    {
-      "@type": "SoftwareApplication",
+      "@type": "WebApplication",
       "name": "ToolKB Image Compressor",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "Any",
@@ -57,7 +48,7 @@ const jsonLd = {
         "Preset targets: 20KB, 50KB, 100KB, 200KB",
         "Custom KB input",
         "Supports JPG, PNG, WebP",
-        "Client-side processing — no file upload",
+        "Client-side processing — image stays in your browser",
         "Free, no sign-up required",
       ],
     },
@@ -72,8 +63,8 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <PageTemplate
-        h1="Tools for the little things."
-        h2="Compress, resize, and prepare your files in seconds. Free, and completely private."
+        h1="Compress images to any size."
+        h2="Set an exact KB target. Drop your photo. Download a file that meets the limit."
       >
         <CompressorApp defaultTargetKb={50} />
 
@@ -84,7 +75,7 @@ export default function Home() {
               WHY TOOLKB
             </span>
             <h2 className="font-headline-lg text-headline-lg text-primary tracking-tight">
-              Get the file right.
+              Get the file right, the first time.
             </h2>
             <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
               Upload forms have file size limits. Email attachments have limits. Most tools make you
@@ -97,17 +88,17 @@ export default function Home() {
               {
                 icon: "assignment",
                 title: "Exam & Portal Forms",
-                body: "Strict upload portals for competitive exams and government applications often set hard limits between 20KB and 100KB.",
+                body: "Some online application portals set hard file size limits between 20KB and 100KB for photo and signature uploads.",
               },
               {
                 icon: "badge",
                 title: "Job Applications",
-                body: "HR portals and recruitment systems typically require a headshot and signature under a combined 150KB.",
+                body: "HR portals and recruitment systems commonly ask for a photo and signature under specific KB limits.",
               },
               {
                 icon: "school",
                 title: "College Admissions",
-                body: "University admission portals frequently cap document uploads at 100KB or 200KB per file.",
+                body: "University and college admission portals frequently cap document uploads at 100KB or 200KB per file.",
               },
               {
                 icon: "flight_takeoff",
@@ -136,12 +127,14 @@ export default function Home() {
           <h2 className="font-headline-sm text-headline-sm text-primary">Compress to a specific size</h2>
           <ul className="flex flex-wrap gap-2 list-none p-0 m-0">
             {[
-              { href: "/compress-image-to-20kb", label: "20KB" },
-              { href: "/compress-image-to-50kb", label: "50KB" },
-              { href: "/compress-image-to-100kb", label: "100KB" },
-              { href: "/compress-image-to-200kb", label: "200KB" },
-              { href: "/signature-compressor", label: "Signature" },
-              { href: "/india-photo-size-requirements", label: "India upload requirements →" },
+              { href: "/compress-image", label: "Any size (custom KB)" },
+              { href: "/compress-image-to-20kb", label: "Compress to 20KB" },
+              { href: "/compress-image-to-50kb", label: "Compress to 50KB" },
+              { href: "/compress-image-to-100kb", label: "Compress to 100KB" },
+              { href: "/compress-image-to-200kb", label: "Compress to 200KB" },
+              { href: "/resize-image", label: "Resize image" },
+              { href: "/signature-to-20kb", label: "Signature to 20KB" },
+              { href: "/signature-to-50kb", label: "Signature to 50KB" },
             ].map(({ href, label }) => (
               <li key={href}>
                 <Link

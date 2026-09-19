@@ -4,23 +4,23 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Compress Image Online Free — Any File Size",
+  title: "Compress Image Online Free | ToolKB",
   description:
-    "Free image compressor. Set any KB target — 20KB, 50KB, 100KB, 200KB or custom. No sign-up. Runs in your browser. JPG, PNG, WebP supported.",
+    "Free image compressor — set any KB target and ToolKB finds the best quality that fits. 20KB, 50KB, 100KB, 200KB or custom. JPG, PNG, WebP. No sign-up.",
   alternates: { canonical: "https://toolkb.in/compress-image" },
   openGraph: {
-    title: "Compress Image Online Free",
+    title: "Compress Image Online Free | ToolKB",
     description:
-      "Compress images to any target file size for free. No uploads, no sign-up, works on any device.",
+      "Compress any image to a specific KB target for free. No sign-up. Your image is processed in your browser.",
     url: "https://toolkb.in/compress-image",
     siteName: "ToolKB",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Compress Image Online Free",
+    title: "Compress Image Online Free | ToolKB",
     description:
-      "Set your target KB — ToolKB compresses the image to fit. Free, no sign-up, no uploads.",
+      "Set a KB target — ToolKB compresses your image to fit. Free, no sign-up, processed in your browser.",
   },
 };
 
@@ -104,7 +104,9 @@ export default function Page() {
               { href: "/compress-image-to-50kb", label: "Compress to 50KB" },
               { href: "/compress-image-to-100kb", label: "Compress to 100KB" },
               { href: "/compress-image-to-200kb", label: "Compress to 200KB" },
-              { href: "/signature-compressor", label: "Compress Signature" },
+              { href: "/resize-image", label: "Resize image" },
+              { href: "/signature-to-20kb", label: "Signature to 20KB" },
+              { href: "/signature-to-50kb", label: "Signature to 50KB" },
             ].map(({ href, label }) => (
               <li key={href}>
                 <Link

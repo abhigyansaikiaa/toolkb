@@ -4,23 +4,23 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Compress Image to 20KB Online Free",
+  title: "Compress Image to 20KB Online Free | ToolKB",
   description:
-    "Compress any image to 20KB free, no sign-up. Strict portal requirement? ToolKB finds the highest quality that still fits 20KB. JPG, PNG, WebP.",
+    "Compress any image to 20KB free, no sign-up. ToolKB finds the highest quality that still fits within 20KB. JPG, PNG, WebP accepted. Processed in your browser.",
   alternates: { canonical: "https://toolkb.in/compress-image-to-20kb" },
   openGraph: {
-    title: "Compress Image to 20KB Online Free",
+    title: "Compress Image to 20KB Online Free | ToolKB",
     description:
-      "Free 20KB image compressor. No uploads, no sign-up. Works in your browser.",
+      "Free 20KB image compressor. No sign-up. Your image is processed in your browser.",
     url: "https://toolkb.in/compress-image-to-20kb",
     siteName: "ToolKB",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Compress Image to 20KB Free",
+    title: "Compress Image to 20KB Free | ToolKB",
     description:
-      "Shrink any photo to exactly 20KB. Free, no sign-up, no uploads.",
+      "Shrink any photo to 20KB. Free, no sign-up, processed in your browser.",
   },
 };
 
@@ -103,11 +103,11 @@ export default function Page() {
           </h2>
           <ul className="flex flex-wrap gap-2 list-none p-0 m-0">
             {[
+              { href: "/compress-image", label: "Any size (custom KB)" },
               { href: "/compress-image-to-50kb", label: "50KB" },
               { href: "/compress-image-to-100kb", label: "100KB" },
               { href: "/compress-image-to-200kb", label: "200KB" },
               { href: "/signature-to-20kb", label: "Signature to 20KB" },
-              { href: "/india-photo-size-requirements", label: "India upload guide →" },
             ].map(({ href, label }) => (
               <li key={href}>
                 <Link

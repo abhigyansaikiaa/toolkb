@@ -9,25 +9,45 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: "How do I compress an image to 50 KB?",
-    answer: "Simply drop or select your photo, tap the 50 KB target button, and tap Compress. ToolKB automatically optimizes the image so the final file lands safely under 50 KB without you having to guess quality settings."
+    question: "How do I compress an image to 50KB?",
+    answer:
+      "Drop or select your photo, tap the 50KB preset button, and tap Compress. ToolKB automatically finds the highest quality that fits within 50KB — you don't need to guess quality settings manually.",
   },
   {
-    question: "Does ToolKB upload my photo to any server?",
-    answer: "No. All image processing runs directly in your browser. Your photos never leave your device, making it safe for ID cards and signatures."
+    question: "Can I compress a JPG to 20KB, 50KB, 100KB, or 200KB?",
+    answer:
+      "Yes. ToolKB accepts JPG, PNG, and WebP files and compresses them to any KB target. Select one of the preset sizes or enter a custom value. The output is always a JPEG file.",
   },
   {
-    question: "Will compressing my photo reduce visible quality?",
-    answer: "ToolKB compresses images smartly to preserve facial contours and text clarity while significantly reducing the file size. Unless compressed below 15 KB, your photos will stay crisp and perfectly readable."
+    question: "Can I use a custom target size?",
+    answer:
+      "Yes. Use the Custom Target field to type any KB value between 1KB and 10,240KB. You can also use the stepper buttons to adjust in 5KB increments.",
   },
   {
-    question: "Can I compress a photo down to 20 KB?",
-    answer: "Yes. Select the 20 KB preset. The tool will automatically adjust the image slightly if needed to ensure the file complies with strict 20 KB limits."
+    question: "How does the compressor hit the exact file size?",
+    answer:
+      "ToolKB uses a binary search algorithm to find the highest JPEG quality level that keeps the file below your target. If quality adjustment alone isn't enough — for very small targets — it also proportionally reduces the image dimensions until the file fits.",
   },
   {
-    question: "Can I use ToolKB directly on mobile?",
-    answer: "Yes! ToolKB is specifically optimized for mobile Safari and Chrome. You can take a photo with your camera or select from your gallery, shrink it immediately, and upload to forms."
-  }
+    question: "Is my image processed in the browser?",
+    answer:
+      "Yes. The entire compression process runs inside your browser tab using standard web APIs (Canvas, OffscreenCanvas, Web Workers). Your image is never sent to a server. You can verify this by opening your browser's Network tab (F12) during compression — there are no outgoing file transfers.",
+  },
+  {
+    question: "What image formats does ToolKB accept?",
+    answer:
+      "ToolKB accepts JPG/JPEG, PNG, and WebP images. HEIC is not currently supported. The compressed output is always a JPEG file regardless of the input format.",
+  },
+  {
+    question: "Will my photo still look clear after compression?",
+    answer:
+      "For portrait-style photos compressed to 50KB or above, the quality difference is barely noticeable. At 20KB, faces remain recognisable though fine background detail may show some softening. At very small targets (under 15KB), some quality loss is unavoidable.",
+  },
+  {
+    question: "Can I use ToolKB on my phone?",
+    answer:
+      "Yes. ToolKB is designed for mobile use. You can select a photo from your gallery or take one with your camera. The compressor works in mobile Chrome and Safari.",
+  },
 ];
 
 export default function FAQSection() {
@@ -45,7 +65,7 @@ export default function FAQSection() {
           Common Questions
         </h2>
         <p className="font-body-md text-body-md text-on-surface-variant">
-          Everything you need to know about preparing your files.
+          Everything you need to know about compressing images to an exact size.
         </p>
       </div>
 
@@ -54,22 +74,24 @@ export default function FAQSection() {
           const isOpen = openIndex === index;
           return (
             <div key={index} className="rounded-xl bg-surface-container-lowest shadow-sm overflow-hidden">
-              <button 
-                type="button" 
+              <button
+                type="button"
                 onClick={() => toggleAccordion(index)}
                 className="w-full p-4 text-left flex items-center justify-between gap-2 font-headline-sm text-headline-sm text-primary"
+                aria-expanded={isOpen}
               >
                 <span>{faq.question}</span>
-                <span 
-                  className="material-symbols-outlined text-[20px] transition-transform duration-200" 
-                  style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                <span
+                  className="material-symbols-outlined text-[20px] transition-transform duration-200 shrink-0"
+                  style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+                  aria-hidden="true"
                 >
                   expand_more
                 </span>
               </button>
-              
-              <div 
-                className={`px-4 pb-4 font-body-sm text-body-sm text-on-surface-variant leading-relaxed ${isOpen ? 'block' : 'hidden'}`}
+
+              <div
+                className={`px-4 pb-4 font-body-sm text-body-sm text-on-surface-variant leading-relaxed ${isOpen ? "block" : "hidden"}`}
               >
                 {faq.answer}
               </div>

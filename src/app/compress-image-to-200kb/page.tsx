@@ -4,22 +4,22 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Compress Image to 200KB Online Free",
+  title: "Compress Image to 200KB Online Free | ToolKB",
   description:
-    "Compress any photo to 200KB free, no sign-up. Great for document uploads, high-quality profiles, and bank KYC forms. Runs in your browser.",
+    "Compress any image to 200KB free, no sign-up. Excellent quality retained at 200KB — suitable for high-quality profiles and document uploads. JPG, PNG, WebP.",
   alternates: { canonical: "https://toolkb.in/compress-image-to-200kb" },
   openGraph: {
-    title: "Compress Image to 200KB Online Free",
+    title: "Compress Image to 200KB Online Free | ToolKB",
     description:
-      "Free 200KB image compressor. No uploads, no sign-up. Excellent quality retained at 200KB.",
+      "Free 200KB image compressor. No sign-up. Excellent quality retained at 200KB. Your image is processed in your browser.",
     url: "https://toolkb.in/compress-image-to-200kb",
     siteName: "ToolKB",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Compress Image to 200KB Free",
-    description: "Reduce any photo to 200KB. Free, no sign-up, runs in your browser.",
+    title: "Compress Image to 200KB Free | ToolKB",
+    description: "Reduce any photo to 200KB. Free, no sign-up, processed in your browser.",
   },
 };
 
@@ -92,6 +92,7 @@ export default function Page() {
           </h2>
           <ul className="flex flex-wrap gap-2 list-none p-0 m-0">
             {[
+              { href: "/compress-image", label: "Any size (custom KB)" },
               { href: "/compress-image-to-20kb", label: "20KB" },
               { href: "/compress-image-to-50kb", label: "50KB" },
               { href: "/compress-image-to-100kb", label: "100KB" },

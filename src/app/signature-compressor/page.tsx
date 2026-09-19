@@ -4,22 +4,22 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Compress Signature Image Online Free",
+  title: "Compress Signature Image Online Free | ToolKB",
   description:
-    "Compress a photo of your handwritten signature to meet strict KB limits. Free, no sign-up. Works in your browser — your signature never leaves your device.",
+    "Compress a photo of your handwritten signature to meet strict KB limits. Free, no sign-up. Your signature is processed in your browser and never uploaded.",
   alternates: { canonical: "https://toolkb.in/signature-compressor" },
   openGraph: {
-    title: "Compress Signature Image Online Free",
+    title: "Compress Signature Image Online Free | ToolKB",
     description:
-      "Signature too large for the upload form? Compress it for free, right in your browser. No uploads, no sign-up.",
+      "Signature too large for the upload form? Compress it for free, right in your browser. No sign-up. Your file stays on your device.",
     url: "https://toolkb.in/signature-compressor",
     siteName: "ToolKB",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Compress Signature Image Free",
-    description: "Shrink a signature photo to any KB limit. Free, no sign-up, no uploads.",
+    title: "Compress Signature Image Free | ToolKB",
+    description: "Shrink a signature photo to any KB limit. Free, no sign-up, processed in your browser.",
   },
 };
 

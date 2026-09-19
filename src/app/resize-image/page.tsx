@@ -3,12 +3,12 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Resize Image Online Free",
+  title: "Resize Image Online Free | ToolKB",
   description:
-    "Resize images to exact pixel dimensions online. Free, no sign-up. Coming soon — for now, use our compressor to reduce file size.",
+    "Resize images to exact pixel dimensions online, free. Coming soon on ToolKB. In the meantime, use the image compressor to reduce file size to any KB target.",
   alternates: { canonical: "https://toolkb.in/resize-image" },
   openGraph: {
-    title: "Resize Image Online Free",
+    title: "Resize Image Online Free | ToolKB",
     description: "Resize images to exact pixel dimensions. Free, no sign-up. Coming soon on ToolKB.",
     url: "https://toolkb.in/resize-image",
     siteName: "ToolKB",
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Resize Image Free",
-    description: "Resize images to exact pixel dimensions. Free, no sign-up. Coming soon.",
+    title: "Resize Image Free | ToolKB",
+    description: "Resize images to exact pixel dimensions. Coming soon. Free, no sign-up.",
   },
 };
 

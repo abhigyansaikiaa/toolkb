@@ -83,13 +83,12 @@ export default function CompressorApp({ defaultTargetKb = 50 }: { defaultTargetK
     const url = URL.createObjectURL(result.blob);
     const a = document.createElement("a");
     a.href = url;
-    
-    // Add -compressed to the original filename
-    const nameParts = file.name.split(".");
-    const ext = nameParts.pop();
-    const baseName = nameParts.join(".");
-    a.download = `${baseName}-compressed.${ext}`;
-    
+
+    // Output is always JPEG regardless of input format.
+    // Strip any existing extension and append .jpg.
+    const baseName = file.name.replace(/\.[^.]+$/, "");
+    a.download = `${baseName}-compressed.jpg`;
+
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

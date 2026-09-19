@@ -45,7 +45,7 @@ export default function PageTemplate({ h1, h2, children }: PageTemplateProps) {
               >
                 lock
               </span>
-              <span>Your files stay on your device. Nothing is uploaded.</span>
+              <span>Your image is processed in your browser. No server upload.</span>
             </div>
           </section>
 
